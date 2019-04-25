@@ -15917,7 +15917,7 @@ var MicRecorder = function () {
       } else if (window.webkitAudioContext) {
         this.context = new window.webkitAudioContext();
       } else {
-        console.err('AudioContext not found');
+        console.error('AudioContext not found');
         return;
       }
       this.config.sampleRate = this.context.sampleRate;
