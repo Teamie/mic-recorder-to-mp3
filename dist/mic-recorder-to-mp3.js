@@ -15963,4 +15963,4 @@ var MicRecorder = function () {
 return MicRecorder;
 
 })));
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=mic-recorder-to-mp3.js.map

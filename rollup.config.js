@@ -12,7 +12,7 @@ export default {
     !!process.env.minify && uglify(),
   ],
   format: 'umd',
-  dest: `dist/index${process.env.minify ? '.min' : ''}.js`,
+  dest: `dist/mic-recorder-to-mp3${process.env.minify ? '.min' : ''}.js`,
   sourceMap: true,
   moduleName: 'MicRecorder',
   useStrict: false,
