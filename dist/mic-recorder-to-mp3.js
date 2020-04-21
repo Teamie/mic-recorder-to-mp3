@@ -15701,6 +15701,56 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
 var Encoder = function () {
   function Encoder(config) {
     classCallCheck(this, Encoder);
@@ -15799,7 +15849,8 @@ var Encoder = function () {
 
   }, {
     key: 'finish',
-    value: function finish() {
+    value: function finish(finalBuffer) {
+      this.encode(finalBuffer);
       this.appendToBuffer(this.mp3Encoder.flush());
 
       return this.dataBuffer;
@@ -15830,6 +15881,7 @@ var MicRecorder = function () {
     this.microphone = null;
     this.processor = null;
     this.startTime = 0;
+    this.buffer = [];
 
     Object.assign(this.config, config);
   }
@@ -15860,12 +15912,14 @@ var MicRecorder = function () {
 
       // Add all buffers from LAME into an array.
       this.processor.onaudioprocess = function (event) {
+        var _buffer;
+
         if (_this.timerToStart) {
           return;
         }
 
-        // Send microphone data to LAME for MP3 encoding while recording.
-        _this.lameEncoder.encode(event.inputBuffer.getChannelData(0));
+        // Pushing all the recorded data to buffer so that we can encode it later
+        (_buffer = _this.buffer).push.apply(_buffer, toConsumableArray(event.inputBuffer.getChannelData(0)));
       };
 
       // Begin retrieving microphone data.
@@ -15945,7 +15999,8 @@ var MicRecorder = function () {
     value: function getMp3() {
       var _this3 = this;
 
-      var finalBuffer = this.lameEncoder.finish();
+      var finalBuffer = this.lameEncoder.finish(this.buffer);
+      this.buffer = [];
 
       return new Promise(function (resolve, reject) {
         if (finalBuffer.length === 0) {

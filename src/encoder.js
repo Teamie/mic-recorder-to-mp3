@@ -81,7 +81,8 @@ class Encoder {
   /**
    * Return full dataBuffer
    */
-  finish() {
+  finish(finalBuffer) {
+    this.encode(finalBuffer);
     this.appendToBuffer(this.mp3Encoder.flush());
 
     return this.dataBuffer;
