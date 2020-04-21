@@ -4,7 +4,7 @@ class MicRecorder {
   constructor(config) {
     this.config = {
       // 128 or 160 kbit/s – mid-range bitrate quality
-      bitRate: 64,
+      bitRate: 128,
 
       // There is a known issue with some macOS machines, where the recording
       // will sometimes have a loud 'pop' or 'pop-click' sound. This flag
@@ -48,9 +48,6 @@ class MicRecorder {
       if (this.timerToStart) {
         return;
       }
-
-      // Send microphone data to LAME for MP3 encoding while recording.
-      // this.lameEncoder.encode(event.inputBuffer.getChannelData(0));
 
       // Pushing all the recorded data to buffer so that we can encode it later
       this.buffer.push(...event.inputBuffer.getChannelData(0));

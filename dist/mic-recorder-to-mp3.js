@@ -15757,7 +15757,7 @@ var Encoder = function () {
 
     this.config = {
       sampleRate: 44100,
-      bitRate: 64
+      bitRate: 128
     };
 
     Object.assign(this.config, config);
@@ -15865,7 +15865,7 @@ var MicRecorder = function () {
 
     this.config = {
       // 128 or 160 kbit/s – mid-range bitrate quality
-      bitRate: 64,
+      bitRate: 128,
 
       // There is a known issue with some macOS machines, where the recording
       // will sometimes have a loud 'pop' or 'pop-click' sound. This flag
@@ -15917,9 +15917,6 @@ var MicRecorder = function () {
         if (_this.timerToStart) {
           return;
         }
-
-        // Send microphone data to LAME for MP3 encoding while recording.
-        // this.lameEncoder.encode(event.inputBuffer.getChannelData(0));
 
         // Pushing all the recorded data to buffer so that we can encode it later
         (_buffer = _this.buffer).push.apply(_buffer, toConsumableArray(event.inputBuffer.getChannelData(0)));

@@ -4,7 +4,7 @@ class Encoder {
   constructor(config) {
     this.config = {
       sampleRate: 44100,
-      bitRate: 64
+      bitRate: 128
     };
 
     Object.assign(this.config, config);
