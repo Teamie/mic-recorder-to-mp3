@@ -4,7 +4,7 @@ class Encoder {
   constructor(config) {
     this.config = {
       sampleRate: 44100,
-      bitRate: 128
+      bitRate: 64
     };
 
     Object.assign(this.config, config);
@@ -81,7 +81,8 @@ class Encoder {
   /**
    * Return full dataBuffer
    */
-  finish() {
+  finish(finalBuffer) {
+    this.encode(finalBuffer);
     this.appendToBuffer(this.mp3Encoder.flush());
 
     return this.dataBuffer;
